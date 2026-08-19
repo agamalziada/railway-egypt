@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ترتيب مصر في مؤشر مدركات الفساد 2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Tajawal",sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-right:3px solid #D85A30;padding-right:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ⑤ من ⑦</p>
+    <p class="title">ترتيب مصر في مؤشر مدركات الفساد 2024</p>
+    <p class="subtitle">منظمة الشفافية الدولية — أدنى مستوى منذ 12 عامًا</p>
+  </div>
+  <div class="callout">"مصر في ذيل الربع الأخير عالميًا في مؤشر الفساد — وهو أسوأ أداء لها في اثني عشر عامًا"</div>
+  
+<div style="text-align:center;background:#faece7;border-radius:10px;padding:clamp(14px,4vw,20px);margin-bottom:14px">
+  <p style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a;margin-bottom:4px">درجة مصر في مؤشر مدركات الفساد 2024</p>
+  <div id="score" style="font-size:clamp(52px,14vw,70px);font-weight:800;color:#D85A30;line-height:1">0</div>
+  <p style="font-size:clamp(14px,4vw,17px);font-weight:700;color:#D85A30;margin-top:4px">من 100 نقطة</p>
+</div>
+<div class="cards" style="margin-bottom:10px">
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:2px">الترتيب العالمي</p>
+    <p style="font-size:clamp(18px,5vw,24px);font-weight:800;color:#D85A30">130 / 180</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">دولة</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:2px">المستوى التاريخي</p>
+    <p style="font-size:clamp(14px,4vw,18px);font-weight:800;color:#D85A30">الأدنى</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">منذ 12 عامًا</p>
+  </div>
+</div>
+<div style="background:#f1efe8;border-radius:7px;padding:9px 12px">
+  <p style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a;margin-bottom:5px">موقع مصر على مقياس المؤشر (0 = فساد مطلق / 100 = نظيف تمامًا)</p>
+  <div style="height:24px;background:#e0ddd6;border-radius:4px;overflow:hidden;position:relative">
+    <div id="bar" style="height:100%;width:0;background:#D85A30;border-radius:4px;transition:width 1.3s ease;display:flex;align-items:center;padding-right:8px">
+      <span style="font-size:10px;font-weight:700;color:#fff;white-space:nowrap">30 نقطة</span>
+    </div>
+    <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:clamp(9px,2vw,10px);color:#888780">70 نقطة تحت الحد الأمثل</span>
+  </div>
+</div>
+<script>
+(function(){
+  setTimeout(function(){
+    document.getElementById("bar").style.width="30%";
+    var s=null;
+    function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/700,1),e=1-Math.pow(1-p,3);
+      document.getElementById("score").textContent=Math.round(e*30);
+      if(p<1)requestAnimationFrame(cu);else document.getElementById("score").textContent="30";}
+    requestAnimationFrame(cu);
+  },200);
+})();
+</script>
+  <p class="source">المصدر: منظمة الشفافية الدولية — مؤشر مدركات الفساد 2024</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
