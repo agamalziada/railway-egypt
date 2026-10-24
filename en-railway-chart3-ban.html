@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Longer bans on resignations and leave in the transport sector</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ③ of ④</p>
+    <p class="title">Longer bans on resignations and leave in the transport sector</p>
+    <p class="subtitle">Years: the ban doubled over seven years</p>
+  </div>
+  <div class="callout">"Over seven years, the ban doubled from an unannounced five years to an official ten years covering the entire transport sector"</div>
+  
+<div style="position:relative;width:100%;height:clamp(185px,48vw,215px)"><canvas id="c"></canvas></div>
+<div style="margin-top:12px">
+  <div style="background:#2c2c2a;border-radius:9px;padding:clamp(10px,3vw,14px)">
+    <p style="font-size:clamp(9px,2vw,10px);font-weight:700;color:#D85A30;letter-spacing:.08em;margin-bottom:6px">⚠ Latest point: July 2026</p>
+    <p style="font-size:clamp(12px,3vw,13px);color:rgba(255,255,255,.8);line-height:1.6">An official <strong style="color:#fff">10-year ban</strong> covers all Ministry of Transport authorities, not only the railway</p>
+  </div>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var amber=dk?"#FAC775":"#BA7517",coral=dk?"#F0997B":"#D85A30",blue=dk?"#85B7EB":"#378ADD";
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{
+      labels:[["2019","(unannounced)"],["2025","Decree 6545"],["July 2026","(entire transport sector)"]],
+      datasets:[{data:[5,5,10],backgroundColor:[amber,amber,coral],borderWidth:0,borderRadius:6}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+    animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*200;}},
+    plugins:{legend:{display:false},
+    tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return "Ban duration: "+c.raw+" years";}}}},
+    scales:{
+      x:{ticks:{color:tc,font:{size:10,family:"Arial"}},grid:{display:false},border:{color:gc}},
+      y:{min:0,max:12,ticks:{color:tc,font:{size:11,family:"Arial"},callback:function(v){return v+" yr";}},grid:{color:gc},border:{display:false}}
+    }}
+  });
+})();
+</script>
+  <p class="source">Source: Railway Authority Decree 6545; transport minister’s instructions, July 2026</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

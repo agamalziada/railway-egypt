@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>How much does it cost to leave a railway job?</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ④ of ④</p>
+    <p class="title">How much does it cost to leave a railway job?</p>
+    <p class="subtitle">EGP: between 4 and 150 months’ wages</p>
+  </div>
+  <div class="callout">"Leaving the job costs between EGP 40,000 and EGP 900,000, equivalent to 4–150 months’ wages"</div>
+  
+<div style="position:relative;width:100%;height:clamp(210px,55vw,250px)"><canvas id="c"></canvas></div>
+<div class="cards" style="margin-top:12px">
+  <div class="card" style="background:#faece7">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:2px">Lowest amount actually paid</p>
+    <p style="font-size:clamp(16px,4.5vw,20px);font-weight:800;color:#D85A30">EGP 40,000+</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">≈ 6 months’ wages (lowest case)</p>
+  </div>
+  <div class="card" style="background:#2c2c2a">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:rgba(255,255,255,.5);margin-bottom:2px">Maximum penalty clause</p>
+    <p style="font-size:clamp(16px,4.5vw,20px);font-weight:800;color:#D85A30">EGP 900,000</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:rgba(255,255,255,.4);margin-top:1px">≈ 150 months’ wages</p>
+  </div>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",amber=dk?"#FAC775":"#BA7517",gray=dk?"#B4B2A9":"#888780";
+  var labels=[
+    ["Amount paid by a colleague","(3 years of service)"],
+    ["Walid’s penalty clause","(contract value)"],
+    ["Kyrillos’s penalty clause","(individual case)"],
+    ["Training cost","(announced)"],
+    ["Penalty clause","(3 times the cost)"]
+  ];
+  var data=[40000,100000,130000,300000,900000];
+  var colors=[gray,amber,amber,coral,coral];
+  var months=["~6 months","~16 months","~21 months","~50 months","~150 months"];
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:0,borderRadius:4}]},
+    options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,
+    animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*80;}},
+    plugins:{legend:{display:false},
+    tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.raw.toLocaleString("en-GB")+" EGP ("+months[c.dataIndex]+")";}}}},
+    scales:{
+      x:{ticks:{color:tc,font:{size:9,family:"Arial"},callback:function(v){return v>=1000?(v/1000)+"k":v;}},grid:{color:gc},border:{display:false}},
+      y:{position:"left",ticks:{color:tc,font:{size:9,family:"Arial"}},grid:{display:false},border:{display:false}}
+    }}
+  });
+})();
+</script>
+  <p class="source">Source: Workers’ testimonies; railway authority trade union member</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
