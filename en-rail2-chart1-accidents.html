@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fluctuations in train operating accidents in Egypt (2023–2025)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ① of ⑦</p>
+    <p class="title">Fluctuations in train operating accidents in Egypt (2023–2025)</p>
+    <p class="subtitle">Number of accidents: 2024 was the worst despite billions in spending</p>
+  </div>
+  <div class="callout">"Railway improvement has not followed a straight line: 2024 was the worst of three years despite billions in spending"</div>
+  
+<div class="cards" style="margin-bottom:14px">
+  <div class="card" style="background:#f1efe8;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#5f5e5a;margin-bottom:3px">2023</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#888780">181</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">accidents</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">2024: the worst</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#D85A30">220</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#993C1D;margin-top:1px">+21.5%</p>
+  </div>
+  <div class="card" style="background:#edf7f3;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#0F6E56;margin-bottom:3px">2025</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#1D9E75">170</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#0F6E56;margin-top:1px">−22.7%</p>
+  </div>
+</div>
+<div style="position:relative;width:100%;height:clamp(170px,44vw,200px)"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var gray=dk?"#B4B2A9":"#888780",coral=dk?"#F0997B":"#D85A30",teal=dk?"#5DCAA5":"#1D9E75";
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:["2023","2024","2025"],datasets:[
+      {type:"bar",data:[181,220,170],backgroundColor:[gray,coral,teal],borderWidth:0,borderRadius:6,order:2},
+      {type:"line",data:[181,220,170],borderColor:coral,borderWidth:2,pointBackgroundColor:[gray,coral,teal],pointRadius:5,tension:0.1,fill:false,order:1}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:900,easing:"easeOutQuart"},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},filter:function(i){return i.datasetIndex===0;},callbacks:{label:function(c){return c.raw+" accidents";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:12,family:"Arial",weight:"700"}},grid:{display:false},border:{color:gc}},
+    y:{min:140,max:240,ticks:{color:tc,font:{size:10,family:"Arial"}},grid:{color:gc},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: CAPMAS annual bulletin</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

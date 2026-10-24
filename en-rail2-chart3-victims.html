@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Casualties on Egypt’s railway network in 2025: three categories</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ③ of ⑦</p>
+    <p class="title">Casualties on Egypt’s railway network in 2025: three categories</p>
+    <p class="subtitle">More than 500 deaths in one year, mostly in the category of accidents involving people</p>
+  </div>
+  <div class="callout">"More than 500 deaths linked to the railway network in 2025, mostly accidents involving people rather than reported operating accidents"</div>
+  
+<div style="position:relative;width:100%;height:clamp(200px,52vw,235px)"><canvas id="c"></canvas></div>
+<div style="margin-top:10px;background:#faece7;border-left:3px solid #D85A30;padding:9px 12px;border-radius:0 6px 6px 0">
+  <p style="font-size:clamp(11px,2.8vw,12px);color:#993C1D">Total deaths across the three categories: <strong>535 deaths</strong>; the officially announced figure is only 39 deaths in operating accidents</p>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",blue=dk?"#85B7EB":"#378ADD",gray=dk?"#B4B2A9":"#888780";
+  var labels=[["Accidents involving people","on railway lines"],["Train operating","accidents"],["Injuries to staff","of the authority"]];
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:labels,datasets:[
+      {label:"Deaths",data:[491,39,5],backgroundColor:[coral,blue,gray],borderWidth:0,borderRadius:4},
+      {label:"Injuries",data:[236,139,215],backgroundColor:[coral+"55",blue+"55",gray+"55"],borderWidth:0,borderRadius:4}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*100;}},
+    plugins:{
+      legend:{display:true,position:"top",align:"end",labels:{color:tc,font:{size:10,family:"Arial"},boxWidth:10,boxHeight:10,padding:10}},
+      tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.dataset.label+": "+c.raw;}}}
+    },
+    scales:{x:{ticks:{color:tc,font:{size:10,family:"Arial"}},grid:{display:false},border:{color:gc}},
+    y:{ticks:{color:tc,font:{size:10,family:"Arial"}},grid:{color:gc},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: Central Agency for Public Mobilization and Statistics (CAPMAS)</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
